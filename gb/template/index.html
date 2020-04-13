@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>G.B | Dashboard</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+    </head>
+
+<body>
+    <br>
+    <br>
+    <div class ="container">
+        <h1>View Grocery List</h1>
+        <a href="login.html">Add Grocery Item</a>
+        
+        <form action="order" method='post'>
+            {% csrf_token %}
+            <div class="row float-right ">
+                <div class="mr-3">                      
+                    <input value="{{fdate}}" required class="form-control" type="date" name="date">
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-danger">Filter</button>
+                </div>
+            </div>
+        </form>
+
+        <br><br><br><br>
+        <div class="table-responsive">
+            <table class="table table-hover" width="100%">
+                <col style="width:40%">
+                <col style="width:15%">
+                <col style="width:25%">
+                <col style="width:10%">
+                <col style="width:10%">
+              
+                <tbody> 
+                {% for item in items %}
+                <tr>
+                    <td>{{item.name}}</td>
+                    <td>{{item.qty}}</td>
+                    <td>{{item.status}}</td>
+                    <td><a href="update?itemId={{item.id}}">Update</a></td>
+                    <td><a href="delete?itemId={{item.id}}">Delete</a></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>        
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>G.B | Add</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+    </head>
+
+<body>
+    <br><br>
+    <div class ="container">
+        <h1>Add Grocery Item</h1>
+        <br>
+        <form action="add" method='post'>
+            {% csrf_token %}
+            <div class="form-group">
+                <label>Item Name</label>
+                <input type="text" class="form-control" name="itemName" placeholder="Enter Item Name">
+            </div>
+            <div class="form-group">
+                <label>Item Quantity</label>
+                <input type="text" class="form-control" name="qty" placeholder="Enter Item Quantity">
+            </div>
+
+            <div class="form-group">
+                <label>Item Status</label>
+                <select class="form-control" name="status">
+                    <option>Pending</option>
+                    <option>Not Available</option>
+                    <option>Bought</option>
+                </select>
+              </div>
+
+            <div class="form-group">
+                <label>Date</label>
+                <input class="form-control" type="date" name="date">
+            </div>
+            <br>
+
+            <button type="submit" class="btn btn-danger">Add Item</button>
+        </form>
+    
+
+    </div>
+
+</body>
+</html>
