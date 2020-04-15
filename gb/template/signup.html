@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>G.B | Signup</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{% static '/css/index.css' %}">
+    </head>
+
+<body>
+<br><br>
+<div class ="container">
+    {% if errorExists %}
+    <div class="alert alert-danger float-right text-right" role="alert">
+        <Strong>{{error}}</strong>
+    </div>
+    {% endif %}
+
+    <h1>User Signup</h1>
+    <br>
+
+    <form action="validate" method="post" oninput='confirmPassword.setCustomValidity(confirmPassword.value != password.value ? "Passwords do not match" : "")'>
+        {% csrf_token %}
+        <div class="form-group">
+            <label>User Name</label>
+            <input required type="text" class="form-control" name="name" placeholder="Enter User Name">
+            <small class="text-muted float-right mt-2">Should be unique</small>
+        </div>
+               
+        <br>
+        <div class="form-group">
+            <label>Password</label>
+            <input required type="password" minlength="8" class="form-control" name="password" placeholder="Enter Password">
+            <small class="text-muted float-right mt-2">Minimum 8 characters</small>
+        </div>
+
+        <br>
+        <div class="form-group">
+            <label>Confirm Password</label>
+            <input required type="password" minlength="8" class="form-control" name="confirmPassword" placeholder="Enter Password">
+            <small class="text-muted float-right mt-2">Repeat password</small>
+        </div>
+                
+
+        <br><br>
+        <button type="submit" class="btn btn-dark btn-lg">Signup</button>
+    </form> 
+    <a href="/" class="text-dark float-right"><strong><u>I want to Login</u></strong></a>
+</div>
+            
+
+
+</body>
+</html>

@@ -17,11 +17,17 @@ from . import views
 from django.urls import path
 
 urlpatterns = [
-    path('', views.index,name="index"),
+    path('', views.userlogin,name="userlogin"),
+    path('logout',views.logout,name="logout"),
+    path('userlogin.html', views.userlogin,name="userlogin"),
+    path('index.html',views.index,name="index"),
     path('login.html',views.login,name="login"),
     path('add',views.add,name="add"),
     path('update',views.update,name="update"),
     path('delete',views.delete,name="delete"),
     path('viewupdate',views.viewupdate,name="viewupdate"),
-    path('order',views.order,name="order")
+    path('order',views.order,name="order"),
+    path('signup',views.signup,name="signup"),
+    path('validateuser',views.validateuser,name="validateuser"),
+    path('validate',views.validate,name="validate")
 ]

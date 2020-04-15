@@ -8,5 +8,6 @@ class Item(models.Model):
 	qty= models.CharField(max_length=100,default="")
 	status= models.CharField(max_length=15,default="")
 	date=  models.DateField(default=datetime.date.today)
+	username=models.CharField(max_length=100,default="")
 
 

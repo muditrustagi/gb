@@ -2,10 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\gb",
-    "\\gb\\main\\migrations",
-    "\\gb\\template",
-    "\\gb\\template\\css"
+    "\\gb\\assets",
+    "\\gb\\gb",
+    "\\gb\\static",
+    "\\gb\\static\\css",
+    "\\gb\\template"
   ],
-  "SelectedNode": "\\gb\\template\\css\\index.css",
+  "SelectedNode": "\\gb\\static\\css\\index.css",
   "PreviewInSolutionExplorer": false
 }

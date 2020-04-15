@@ -3,8 +3,8 @@
 <html>
     <head>
         <title>G.B | Update</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{% static '/css/index.css' %}">
     </head>
 
     <body>
@@ -30,19 +30,19 @@
             <div class="form-group">
                 <label>Item Status</label>
                 <select class="form-control" name="status">
-                  <option {% ifequal item.status 'Pending' %} selected='selected' {% endifequal %}>Pending</option>
-                  <option {% ifequal item.status 'Not Available' %} selected='selected' {% endifequal %}>Not Available</option>
-                  <option {% ifequal item.status 'Bought' %}        selected='selected' {% endifequal %}>Bought</option>
+                  <option {% ifequal item.status 'PENDING' %} selected='selected' {% endifequal %}>PENDING</option>
+                  <option {% ifequal item.status 'NOT AVAILABLE' %} selected='selected' {% endifequal %}>NOT  AVAILABLE</option>
+                  <option {% ifequal item.status 'BOUGHT' %}        selected='selected' {% endifequal %}>BOUGHT</option>
                 </select>
               </div>
 
             <div class="form-group">
                 <label>Date</label>
-                <input value="{{item.date|date:"Y-m-d" }}" required class="form-control" type="date" name="date">
+                <input value="{{item.date|date:"Y-m-d" }}" required class="form-control text-left" type="date" name="date">
               </div>
   
             <br>
-                <button type="submit" class="btn btn-danger">Update Item</button>
+                <button type="submit" class="btn btn-dark">Update Item</button>
         </form>
     
 

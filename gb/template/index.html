@@ -2,52 +2,132 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>G.B | Dashboard</title>
+        <title>G.B | Index</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{% static '/css/index.css' %}">
+       
     </head>
 
 <body>
-    <br>
-    <br>
+    <div class="float-right m-3">
+        <button type="button" data-target="#mod" data-toggle="modal" class="btn btn-dark rounded-circle">
+            <i class="fa fa-user" aria-hidden="true"></i>
+        </button>
+
+        <button type="button" data-target="#mod1" data-toggle="modal" class="btn btn-dark rounded-circle">
+            <i class="fa fa-sign-out-alt" aria-hidden="true"></i>
+        </button>
+    </div>
+
+    <br><br><br>
+            
     <div class ="container">
-        <h1>View Grocery List</h1>
-        <a href="login.html">Add Grocery Item</a>
-        
-        <form action="order" method='post'>
-            {% csrf_token %}
-            <div class="row float-right ">
+        <div class="container">
+            <form class="row float-right mt-5" action="order" method='post'>
+                {% csrf_token %}
                 <div class="mr-3">                      
-                    <input value="{{fdate}}" required class="form-control" type="date" name="date">
+                    <input value="{{fdate}}" required class="form-control text-right" type="date" name="date">
                 </div>
                 <div>
-                    <button type="submit" class="btn btn-danger">Filter</button>
+                    <button type="submit" class="btn btn-dark">Filter</button>
                 </div>
-            </div>
-        </form>
-
-        <br><br><br><br>
-        <div class="table-responsive">
-            <table class="table table-hover" width="100%">
-                <col style="width:40%">
-                <col style="width:15%">
-                <col style="width:25%">
-                <col style="width:10%">
-                <col style="width:10%">
-              
-                <tbody> 
-                {% for item in items %}
-                <tr>
-                    <td>{{item.name}}</td>
-                    <td>{{item.qty}}</td>
-                    <td>{{item.status}}</td>
-                    <td><a href="update?itemId={{item.id}}">Update</a></td>
-                    <td><a href="delete?itemId={{item.id}}">Delete</a></td>
-                </tr>
-                {% endfor %}
-                </tbody>
-            </table>        
+            </form>
+        </div>
+        
+        <div class="container">
+            <h1>Grocery  <span class="badge badge-dark">List</span></h1>
+            <a href="login.html">Add Grocery Item</a>
         </div>
     </div>
+
+    <br><br><br><br>
+
+    <div class="container">
+        {% if errorExists %}
+            <div class="alert alert-dark float-right text-right" role="alert">
+                <Strong>{{error}}</strong>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+        
+            {% for item in items %}
+            <div class="col-sm-6 col-lg-3 py-2">
+                <div class="card h-100 shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">{{item.name}}</h5>
+                        <h6 class="card-text text-muted">{{item.qty}}</h6>
+                    
+                        {% ifequal item.status 'BOUGHT' %}
+                            <p class="card-text text-success">{{item.status}}</p>
+                        {% endifequal %}
+                    
+                        {% ifequal item.status 'NOT AVAILABLE' %}
+                            <p class="card-text text-primary">{{item.status}}</p>
+                        {% endifequal %}
+                    
+                        {% ifequal item.status 'PENDING' %}
+                            <p class="card-text text-danger">{{item.status}}</p>
+                        {% endifequal %}
+
+                        <br>
+                        <a href="update?itemId={{item.id}}" class="card-link">UPDATE</a>
+                        <a href="delete?itemId={{item.id}}" class="card-link">DELETE</a>
+                    </div>
+                    <div class="card-footer bg-dark">
+                        <small class="text-white float-right">{{item.date}}</small>
+                    </div>
+                
+                </div>
+            </div>
+            {% endfor %}
+    </div>
+</div>
+
+
+<div class="modal" id="mod" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content border-0 rounded">  
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Welcome, {{user.username|title}}</h5>
+      </div>
+        <div class="modal-body bg-light">
+            With <h1>Grocery  <span class="badge badge-dark">List</span></h1><span class="badge badge-light">We promise, You won't miss out on anything anymore.</span>
+            <br>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">I understand</button>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal" id="mod1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content border-0 rounded">  
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to logout?</h5>
+      </div>
+
+        <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <form action="logout" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-secondary">Yes, I want to logout</button>
+            </form>
+        </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
 </body>
 </html>
